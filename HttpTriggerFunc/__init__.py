@@ -1,8 +1,12 @@
 import logging
-
 import azure.functions as func
 
+import newrelic.agent
+newrelic.agent.initialize('./newrelic.ini')
+newrelic.agent.register_application(name='Python-NewRelic-Local', timeout=1)
 
+
+@newrelic.agent.background_task()
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
 

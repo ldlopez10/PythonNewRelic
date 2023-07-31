@@ -2,6 +2,8 @@
   "IsEncrypted": false,
   "Values": {
     "FUNCTIONS_WORKER_RUNTIME": "python",
-    "AzureWebJobsStorage": ""
+    "AzureWebJobsStorage": "",
+    "NEW_RELIC_LICENSE_KEY": "",
+    "NEW_RELIC_APP_NAME": "Python-NewRelic-Local"
   }
 }
