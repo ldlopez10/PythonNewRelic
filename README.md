@@ -2,24 +2,50 @@
 
 Basic Python serverless function with New Relic Monitoring
 
-## Development Environment Set Up
+## MAC Development Environment Set Up
 
-1. Install Python on your machine [Install Python Docs](https://www.python.org/downloads/)
+1. Install [Homebrew](https://brew.sh/), if it's not already installed.
+   - `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
+
+2. Install Python on your machine [Install Python Docs](https://www.python.org/downloads/)
 
    - verify install
    - `python3 --version` or `python --version`
 
-2. Install **[Azure function Core Tools](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=windows%2Cstorageexplorer%2Cv2%2Cbash&pivots=programming-language-python)**
+3. Install **[Azure function Core Tools](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=windows%2Cstorageexplorer%2Cv2%2Cbash&pivots=programming-language-python#install-the-azure-functions-core-tools)**
 
-   **MAC installation:**
+   - Install Azure function Core tools using Brew
+      ```
+      brew tap azure/functions
+      brew install azure-functions-core-tools@4
+      # if upgrading on a machine that has 2.x or 3.x installed:
+      brew link --overwrite azure-functions-core-tools@4
+      ```
 
-   - `brew install azure-functions-core-tools@4`
+   -  verify install
+   - `func --version`
 
+4. [Create New Relic account](https://newrelic.com/signup)
+   - Free account per single email
+
+## Windows Development Environment Set Up
+
+1. Install Python on your machine [Install Python Docs](https://www.python.org/downloads/)
    - verify install
+   - `python3 --version` or `python --version`
+
+2. Install **[Azure function Core Tools](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=windows%2Cstorageexplorer%2Cv2%2Cbash&pivots=programming-language-python#install-the-azure-functions-core-tools)**
+    
+    Download and run the Core Tools installer, based on your version of Windows:
+   - [v4.x - Windows 64-bit](https://go.microsoft.com/fwlink/?linkid=2174087) (Recommended. [Visual Studio Code debugging](https://learn.microsoft.com/en-us/azure/azure-functions/functions-develop-vs-code#debugging-functions-locally) requires 64-bit.)
+   - [v4.x - Windows 32-bit](https://go.microsoft.com/fwlink/?linkid=2174159)
+
+
+   -  verify install
    - `func --version`
 
 3. [Create New Relic account](https://newrelic.com/signup)
-   - Free account per single email
+- Free account per single email
 
 ## How to Run this function
 
@@ -33,9 +59,8 @@ Basic Python serverless function with New Relic Monitoring
 4. Run the function
    - `func start`
 
-If you have a New Relic account created add your New Relic licence Key to the local.setting.json file and run the function
-
-`NEW_RELIC_LICENSE_KEY": "123456789NRAL`
+5. (optional) add NewRelic License Key to `local.setting.json` and run the function `func start`
+   - `NEW_RELIC_LICENSE_KEY": "123456789NRAL`
 
 ## Endpoints
 
@@ -43,7 +68,7 @@ http://localhost:7071/api/HttpTriggerFunc
 
 http://localhost:7071/api/HttpTriggerFunc?name=johndoe
 
-## New Relic
+## New Relic Docs
 
 Navigate to https://one.newrelic.com/ then click APM & Services tab to see your data
 
@@ -53,6 +78,6 @@ Navigate to https://one.newrelic.com/ then click APM & Services tab to see your 
   - see new relic python agent methods that you can use to track your data
 -
 
-## External API Cat-Facts
+## External API Cat-Facts Docs
 
 https://alexwohlbruck.github.io/cat-facts/docs/
