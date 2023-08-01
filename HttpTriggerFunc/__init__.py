@@ -24,11 +24,11 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             name = req_body.get('name')
 
     if name:
-        
-        
+        generate_random_error()
         cat_fact = get_cat_fact()
         return func.HttpResponse(f"Hello, {name}. This HTTP triggered function executed successfully, so here is your cat fact: \n \n{cat_fact}")
     else:
+        generate_random_error()
         return func.HttpResponse(
              "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.",
              status_code=200
@@ -67,10 +67,17 @@ def get_cat_fact():
     except requests.RequestException as e:
         # Log the exception if there was an error during the API call
         logging.exception("Error occurred while calling the external API: %s", str(e))
-        return f"Error occurred while calling the external API. status_code: {response.status_code}"
+        raise Exception(f"Error occurred while calling the external API. status_code: {response.status_code}")
 
 @newrelic.agent.function_trace(name="generate_random_index")
 def generate_random_index(array):
     # Generate a random index within the range of the array's length
     random_index = random.randint(0, len(array) - 1)
     return random_index
+
+@newrelic.agent.function_trace(name="generate_random_error")
+def generate_random_error():
+    # Simulate a 10% chance of generating an error
+    if random.random() < 0.10:
+        logging.error("Logging Randomly generated Error")
+        raise Exception ("This is a random simulated error.")
