@@ -74,7 +74,7 @@ Navigate to https://one.newrelic.com/ then click APM & Services tab to see your 
 
 - [NewRelic University](https://learn.newrelic.com/page/courses) (New Relic training courses)
 
-- **[Python NewRelic Agent Docs](https://newrelic.com/signup)**
+- **[Python NewRelic Agent Docs](https://docs.newrelic.com/docs/apm/agents/python-agent/python-agent-api/guide-using-python-agent-api/)**
   - see new relic python agent methods that you can use to track your data
 -
 

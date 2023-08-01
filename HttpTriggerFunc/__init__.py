@@ -4,12 +4,15 @@ import requests
 import random
 import json
 
+# Importing New Relic agents, 
 import newrelic.agent
+# Initalizing the agent to read configuration settings from our newrelic.ini file
 newrelic.agent.initialize('./newrelic.ini')
+# Registering the applications to New Relic so it can recieve data
 newrelic.agent.register_application(name='Python-NewRelic-Local', timeout=1)
 
 
-# @newrelic.agent.background_task()
+# Instrumenting a web transaction
 @newrelic.agent.web_transaction(name="HttpTriggerFunc")
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
@@ -34,11 +37,14 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
              status_code=200
         )
         
-
+# Report calls to external services as transaction trace segments.
 @newrelic.agent.external_trace('library', 'https://cat-fact.herokuapp.com/facts', 'get')
 def get_cat_fact():
-    # Replace 'YOUR_EXTERNAL_API_URL' with the actual URL of the external API you want to call.
+    
     external_api_url = 'https://cat-fact.herokuapp.com/facts'
+    
+    # Uncomment line below and comment out the line above to break external api call
+    # external_api_url = 'https://cat-fact.herokuapp.com/factsas;kljas;dklf'
 
     try:
         # Call the external API
@@ -69,6 +75,7 @@ def get_cat_fact():
         logging.exception("Error occurred while calling the external API: %s", str(e))
         raise Exception(f"Error occurred while calling the external API. status_code: {response.status_code}")
 
+# Used to instrument functions, methods, generators, and coroutines that aren't instrumented by default.
 @newrelic.agent.function_trace(name="generate_random_index")
 def generate_random_index(array):
     # Generate a random index within the range of the array's length
