@@ -50,7 +50,7 @@ Basic Python serverless function with New Relic Monitoring
 ## How to Run this function
 
 1. Create a virtual environment by running
-   - `python -m venv .venv`
+   - `python -m venv .venv` or `python3 -m venv .venv`
 2. Activate your virtual environment by running
    - `source .venv/Scripts/activate`
    - If this does not work try: `source .venv/bin/activate`
